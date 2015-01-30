@@ -48,20 +48,20 @@ describe("Enumerable", function()
       end)
     end)
 
-    describe("toTable()", function()
+    describe("to_table()", function()
       local data = {'test'}
       local complexData = {'test', data}
 
 
       it("clones internal data", function()
-        local result = Enumerable.create(data):toTable()
+        local result = Enumerable.create(data):to_table()
 
         assert.are_not.equal(data, result)
         assert.same(result, data)
       end)
 
       it("copies child content by reference", function()
-        local result = Enumerable.create(complexData):toTable()
+        local result = Enumerable.create(complexData):to_table()
 
         assert.are_not.equal(data, result)
         assert.are.equal(data, result[2])
@@ -462,7 +462,20 @@ describe("Enumerable", function()
 
   describe("select()", function()
     local instance = Enumerable.create({1,2,3,4,5,6})
-    
+     it("applies callback to each element", function()
+      local callback = spy.new(function() end)
+
+      instance:reject(callback)
+      
+      assert.spy(callback).was.called_with(1, 1)
+      assert.spy(callback).was.called_with(2, 2)
+      assert.spy(callback).was.called_with(3, 3)
+      assert.spy(callback).was.called_with(4, 4)
+      assert.spy(callback).was.called_with(5, 5)
+      assert.spy(callback).was.called_with(6, 6)
+      assert.spy(callback).was.called(6)
+    end)
+
     it("returns an instance with items included based on callback result", function()
       local result = instance:select(function(v) return v % 2 == 0 end)
 
@@ -534,14 +547,24 @@ describe("Enumerable", function()
   end)
 
   describe("partition()", function()
-    local instance = Enumerable.create({1,2,3,4})
     local callback = function(v) return v % 2 == 0 end 
 
     it("creates lists based on boolean callback result", function()
+      local instance = Enumerable.create({1,2,3,4})
       local truthyResult, falseyResult = instance:partition(callback)
 
       assert.are.same(Enumerable.create({2,4}), truthyResult)
       assert.are.same(Enumerable.create({1,3}), falseyResult)
+    end)
+
+    describe("when there are no results", function()
+      it("return partitioned tables", function()
+        local instance = Enumerable.create()
+        local truthyResult, falseyResult = instance:partition(callback)
+
+        assert.are.same({}, truthyResult:data())
+        assert.are.same({}, falseyResult:data())
+      end)
     end)
   end)
 end)
