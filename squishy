@@ -1,0 +1,3 @@
+Output "enumerable-min.lua"
+Main "enumerable.lua"
+Option "minify_level" "full"
