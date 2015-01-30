@@ -11,5 +11,5 @@ task :minify do
 end
 
 task :doc do
-  system('ldoc .')
+  system('ldoc enumerable.lua')
 end

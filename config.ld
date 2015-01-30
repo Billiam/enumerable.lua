@@ -1,6 +1,6 @@
 title = 'Enumerable.lua Reference'
 all = true
 format = 'discount'
-style = '!fixed'
+style = '!pale'
 one = true
 sort = true
