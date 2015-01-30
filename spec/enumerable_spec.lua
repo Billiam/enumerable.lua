@@ -48,20 +48,20 @@ describe("Enumerable", function()
       end)
     end)
 
-    describe("toTable()", function()
+    describe("to_table()", function()
       local data = {'test'}
       local complexData = {'test', data}
 
 
       it("clones internal data", function()
-        local result = Enumerable.create(data):toTable()
+        local result = Enumerable.create(data):to_table()
 
         assert.are_not.equal(data, result)
         assert.same(result, data)
       end)
 
       it("copies child content by reference", function()
-        local result = Enumerable.create(complexData):toTable()
+        local result = Enumerable.create(complexData):to_table()
 
         assert.are_not.equal(data, result)
         assert.are.equal(data, result[2])

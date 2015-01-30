@@ -64,7 +64,7 @@ end
 
 --- Return the unwrapped collection data
 -- @usage 
---  collectionData = collection:toTable()
+--  collectionData = collection:to_table()
 -- @treturn table
 function Enumerable:data()
   return self._data
@@ -72,9 +72,9 @@ end
 
 --- Create a shallow copy of the unwrapped collection data
 -- @usage 
---  clonedData = collection:toTable()
+--  clonedData = collection:to_table()
 -- @treturn table
-function Enumerable:toTable()
+function Enumerable:to_table()
   local meta = getmetatable(self._data)
   local target = {}
 

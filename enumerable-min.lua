@@ -19,7 +19,7 @@ local e={_data=e or{}}setmetatable(e,n)return e
 end
 function n:data()return self._data
 end
-function n:toTable()local t=getmetatable(self._data)local n={}for e,t in pairs(self._data)do n[e]=t end
+function n:to_table()local t=getmetatable(self._data)local n={}for e,t in pairs(self._data)do n[e]=t end
 setmetatable(n,t)return n
 end
 function n:each(n)for t,e in ipairs(self._data)do
