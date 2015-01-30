@@ -1,0 +1,1291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Enumerable.lua Reference</title>
+    <link rel="stylesheet" href="ldoc_fixed.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+<li><a href="#Local_Functions">Local Functions</a></li>
+</ul>
+
+
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>enumerable</code></h1>
+<p>A collection library to simplify sequential table operations</p>
+<p><pre>
+<span class="keyword">local</span> Enumerable = <span class="global">require</span>(<span class="string">'enumerable'</span>)
+Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>})
+</pre>
+
+</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Author</strong>: Billiam</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable.create">Enumerable.create (collection)</a></td>
+	<td class="summary">Enumerable constructor.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:all">Enumerable:all (callback)</a></td>
+	<td class="summary">Returns true if callback returns truthy for all elements in the collection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:any">Enumerable:any (callback)</a></td>
+	<td class="summary">Returns true if callback returns truthy for any element in the collection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:collect">Enumerable:collect ()</a></td>
+	<td class="summary">
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:concat">Enumerable:concat (other)</a></td>
+	<td class="summary">Append the contents of one table onto the end of the exsting enumerable</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:count">Enumerable:count (callback)</a></td>
+	<td class="summary">Return the number of items in the collection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:data">Enumerable:data ()</a></td>
+	<td class="summary">Return the unwrapped collection data</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:detect">Enumerable:detect ()</a></td>
+	<td class="summary">
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:each">Enumerable:each (callback)</a></td>
+	<td class="summary">Pass all elements in the collection to a callback</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:empty">Enumerable:empty ()</a></td>
+	<td class="summary">Whether the collection has no elements.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:find">Enumerable:find (callback)</a></td>
+	<td class="summary">Returns the first element in the collection where the callback returns true</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:find_all">Enumerable:find_all ()</a></td>
+	<td class="summary">
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:find_index">Enumerable:find_index (callback)</a></td>
+	<td class="summary">Find the position of the first item in collection for which
+ the callback returns true.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:first">Enumerable:first (n)</a></td>
+	<td class="summary">Return the first element or elements in the collection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:group_by">Enumerable:group_by (callback)</a></td>
+	<td class="summary">Groups elements into collections based on the result of the provided callback.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:inject">Enumerable:inject ()</a></td>
+	<td class="summary">
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:last">Enumerable:last (n)</a></td>
+	<td class="summary">Return the last element or elements in the collection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:map">Enumerable:map (callback)</a></td>
+	<td class="summary">Pass all elements in collection to a callback.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:max">Enumerable:max (callback)</a></td>
+	<td class="summary">Find the highest value in the enumerable instance.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:min">Enumerable:min (callback)</a></td>
+	<td class="summary">Find the lowest value in the enumerable instance.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:minmax">Enumerable:minmax (callback)</a></td>
+	<td class="summary">Find the highest and lowest values in the enumerable.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:partition">Enumerable:partition (callback)</a></td>
+	<td class="summary">Split enumerable into two groups, based on the true or false result of the callback.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:pop">Enumerable:pop ()</a></td>
+	<td class="summary">Remove and return the last item from the collection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:push">Enumerable:push (...)</a></td>
+	<td class="summary">Add one or more items to the enumerable.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:reduce">Enumerable:reduce (initial, callback)</a></td>
+	<td class="summary">Combine elements of enumerable by passing all items to a callback.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:reject">Enumerable:reject (callback)</a></td>
+	<td class="summary">Create a new collection with elements which the callback returns false.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:select">Enumerable:select (callback)</a></td>
+	<td class="summary">Create a new collection with elements which the callback returns true.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:shift">Enumerable:shift ()</a></td>
+	<td class="summary">Remove and return the first item from the collection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:toTable">Enumerable:toTable ()</a></td>
+	<td class="summary">Create a shallow copy of the unwrapped collection data</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Enumerable:unshift">Enumerable:unshift (...)</a></td>
+	<td class="summary">Insert one or more items into the beginning of the collection.</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#enumerable._data">enumerable._data</a></td>
+	<td class="summary">Internal collection data</td>
+	</tr>
+</table>
+<h2><a href="#Local_Functions">Local Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#enumerable.isCallable">enumerable.isCallable (f)</a></td>
+	<td class="summary">Whether the item passed in may be called as a function</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#enumerable.isSequence">enumerable.isSequence (t)</a></td>
+	<td class="summary">Tests tables for numeric keys with no gaps</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    Methods
+    <dl class="function">
+    <dt>
+    <a name = "Enumerable.create"></a>
+    <strong>Enumerable.create (collection)</strong>
+    </dt>
+    <dd>
+    Enumerable constructor.
+ If no collection is provided, a new empty table will be generated.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+            <span class="types">optional <a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         Sequential table to wrap
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        A new collection instance
+    </ol>
+
+    <h3>Raises:</h3>
+    &lsquo;Enumerable data must be a sequence&rsquo; if given a non-sequential table
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">collection = Enumerable.create({<span class="number">123</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:all"></a>
+    <strong>Enumerable:all (callback)</strong>
+    </dt>
+    <dd>
+    Returns true if callback returns truthy for all elements in the collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  items = Enumerable.create({<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>})
+  items:all(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value &gt; <span class="number">5</span> <span class="keyword">end</span>)
+  -&gt; <span class="keyword">true</span>
+  items:all(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value &lt; <span class="number">25</span> <span class="keyword">end</span>)
+  -&gt; <span class="keyword">false</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:any"></a>
+    <strong>Enumerable:any (callback)</strong>
+    </dt>
+    <dd>
+    Returns true if callback returns truthy for any element in the collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  items = Enumerable.create({<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>})
+  items:any(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value &gt; <span class="number">25</span> <span class="keyword">end</span>)
+  -&gt; <span class="keyword">true</span>
+  items:any(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value &gt; <span class="number">30</span> <span class="keyword">end</span>)
+  -&gt; <span class="keyword">false</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:collect"></a>
+    <strong>Enumerable:collect ()</strong>
+    </dt>
+    <dd>
+
+
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#Enumerable:map">Enumerable:map</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Enumerable:concat"></a>
+    <strong>Enumerable:concat (other)</strong>
+    </dt>
+    <dd>
+    Append the contents of one table onto the end of the exsting enumerable
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">other</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         Table with content to append to enumerable
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        The enumerable instance
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  pets = Enumerable:create({<span class="string">'dog'</span>, <span class="string">'cat'</span>})
+  pets:concat({<span class="string">'turtle'</span>, <span class="string">'wizard'</span>})
+  -&gt; pets now contains {<span class="string">'dog'</span>, <span class="string">'cat'</span>, <span class="string">'turtle'</span>, <span class="string">'wizard'</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:count"></a>
+    <strong>Enumerable:count (callback)</strong>
+    </dt>
+    <dd>
+    Return the number of items in the collection.
+ If a callback is given, count will return the
+ number of elements for which the callback returns true
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+         Callback used to determine whether element should be counted
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  collection = Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>})
+  collection:count()
+  -&gt; <span class="number">3</span>
+  collection:count(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>)
+  -&gt; <span class="number">1</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:data"></a>
+    <strong>Enumerable:data ()</strong>
+    </dt>
+    <dd>
+    Return the unwrapped collection data
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">collectionData = collection:toTable()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:detect"></a>
+    <strong>Enumerable:detect ()</strong>
+    </dt>
+    <dd>
+
+
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#Enumerable:select">Enumerable:select</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Enumerable:each"></a>
+    <strong>Enumerable:each (callback)</strong>
+    </dt>
+    <dd>
+    Pass all elements in the collection to a callback
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        The collection instance
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">collection:each(<span class="keyword">function</span>(value, index) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:empty"></a>
+    <strong>Enumerable:empty ()</strong>
+    </dt>
+    <dd>
+    Whether the collection has no elements.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> collection = Enumerable.create()
+  <span class="keyword">if</span> collection:empty() <span class="keyword">then</span>
+    <span class="global">print</span>(<span class="string">'Collection is empty'</span>)
+  <span class="keyword">end</span>
+  -&gt; Collection is empty</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:find"></a>
+    <strong>Enumerable:find (callback)</strong>
+    </dt>
+    <dd>
+    Returns the first element in the collection where the callback returns true
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Matching item
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  numbers = Enumerable.create({<span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>})
+  numbers:find(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value &gt; <span class="number">25</span> <span class="keyword">end</span>)
+  -&gt; <span class="number">30</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:find_all"></a>
+    <strong>Enumerable:find_all ()</strong>
+    </dt>
+    <dd>
+
+
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#Enumerable:select">Enumerable:select</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Enumerable:find_index"></a>
+    <strong>Enumerable:find_index (callback)</strong>
+    </dt>
+    <dd>
+    Find the position of the first item in collection for which
+ the callback returns true.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        the position of the matched element
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  collection = Collection.create({<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>})
+  collection:findIndex(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value &gt; <span class="number">2</span> <span class="keyword">end</span>)
+  -&gt; <span class="number">4</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:first"></a>
+    <strong>Enumerable:first (n)</strong>
+    </dt>
+    <dd>
+    Return the first element or elements in the collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+            <span class="types">optional <span class="type">int</span></span>
+         Number of elements to return. If absent, the first item will be returned.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a> or <span class="type">*</span></span>
+
+
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#Enumerable:last">Enumerable:last</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  collection = Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>})
+  collection:first()
+  -&gt; <span class="number">1</span>
+  collection:first(<span class="number">3</span>)
+  -&gt; {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:group_by"></a>
+    <strong>Enumerable:group_by (callback)</strong>
+    </dt>
+    <dd>
+    Groups elements into collections based on the result of the provided callback.
+ Resulting table will have keys matching the returned value of the callback, and
+ values as a table of elements which returned that value.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  numbers = Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>})
+  result = Enumerable.group_by(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value % <span class="number">3</span> <span class="keyword">end</span>)
+  result[<span class="number">0</span>]
+  -&gt; Enumerable containing {<span class="number">3</span>, <span class="number">6</span>}
+  result[<span class="number">1</span>]
+  -&gt; Enumerable containing {<span class="number">2</span>, <span class="number">5</span>}
+  result[<span class="number">2</span>]
+  -&gt; Enumerable containing {<span class="number">1</span>, <span class="number">4</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:inject"></a>
+    <strong>Enumerable:inject ()</strong>
+    </dt>
+    <dd>
+
+
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#Enumerable:reduce">Enumerable:reduce</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Enumerable:last"></a>
+    <strong>Enumerable:last (n)</strong>
+    </dt>
+    <dd>
+    Return the last element or elements in the collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+            <span class="types">optional <span class="type">int</span></span>
+         Number of elements to return. If absent, the last item will be returned.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#Enumerable:first">Enumerable:first</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  collection = Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>})
+  collection:last()
+  -&gt; <span class="number">4</span>
+  collection:last(<span class="number">3</span>)
+  -&gt; {<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:map"></a>
+    <strong>Enumerable:map (callback)</strong>
+    </dt>
+    <dd>
+    Pass all elements in collection to a callback.
+ returns a new enumerable instance containing values
+ returned by the callback.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        New enumerable instance
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  collection = Enumerable.create({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>})
+  collection:map(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value* <span class="number">2</span> <span class="keyword">end</span>)
+ -&gt; Enumerable containing {<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:max"></a>
+    <strong>Enumerable:max (callback)</strong>
+    </dt>
+    <dd>
+    Find the highest value in the enumerable instance.
+ If a callback is provided, the return value will be used
+ to determine the highest value.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types">optional <span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Highest value
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  strings = Enumerable.create({<span class="string">'aaaaaa'</span>, <span class="string">'bbb'</span>, <span class="string">'c'</span>})
+  strings:max()
+ -&gt; <span class="string">'c'</span>
+  strings:max(<span class="keyword">function</span>(value) <span class="keyword">return</span> #value <span class="keyword">end</span>)
+ -&gt; <span class="string">'aaaaa'</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:min"></a>
+    <strong>Enumerable:min (callback)</strong>
+    </dt>
+    <dd>
+    Find the lowest value in the enumerable instance.
+ If a callback is provided, the return value will be used
+ to determine the lowest value.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types">optional <span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Lowest value
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  strings = Enumerable.create({<span class="string">'aaaaaa'</span>, <span class="string">'bbb'</span>, <span class="string">'c'</span>})
+  strings:min()
+ -&gt; <span class="string">'aaaaa'</span>
+  strings:min(<span class="keyword">function</span>(value) <span class="keyword">return</span> #value <span class="keyword">end</span>)
+ -&gt; <span class="string">'c'</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:minmax"></a>
+    <strong>Enumerable:minmax (callback)</strong>
+    </dt>
+    <dd>
+    Find the highest and lowest values in the enumerable.
+ If a callback is provided, the return value will be used
+ to determine the highest and lowest values.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types">optional <span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        Lowest value</li>
+        <li>
+        Highest value</li>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  numbers = Enumerable.create({<span class="number">6</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>})
+  lowest, highest = numbers:minmax()
+ -&gt; (<span class="number">1</span>,<span class="number">6</span>)
+  strings:max(<span class="keyword">function</span>(value) <span class="keyword">return</span> <span class="number">10</span> - value <span class="keyword">end</span>)
+ -&gt; (<span class="number">6</span>, <span class="number">1</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:partition"></a>
+    <strong>Enumerable:partition (callback)</strong>
+    </dt>
+    <dd>
+    Split enumerable into two groups, based on the true or false result of the callback. </p>
+
+<p> Aliases: find_all, detect
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        Collection containing items which returned true</li>
+        <li>
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        Collection containing items which returned false</li>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  numbers = Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>})
+ even, odd = Enumerable:partition(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>)
+ -&gt; even is a collection containing {<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>}
+ -&gt; odd is a collection containing {<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:pop"></a>
+    <strong>Enumerable:pop ()</strong>
+    </dt>
+    <dd>
+    Remove and return the last item from the collection.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        The collection instance
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  items = Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>})
+  items:pop()
+ -&gt; returns <span class="number">3</span>
+ -&gt; items now contains {<span class="number">1</span>,<span class="number">2</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:push"></a>
+    <strong>Enumerable:push (...)</strong>
+    </dt>
+    <dd>
+    Add one or more items to the enumerable.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+         Items to append
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        The collection instance
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  items = Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>})
+  items:push(<span class="number">4</span>, <span class="number">5</span>)
+ -&gt; items contains {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:reduce"></a>
+    <strong>Enumerable:reduce (initial, callback)</strong>
+    </dt>
+    <dd>
+    Combine elements of enumerable by passing all items to a callback.
+ Values returned by the callback will be used as the accumulator value
+ for subsequent callbacks.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">initial</span>
+            <span class="types">optional <span class="type">int</span></span>
+         Initial value for accumulator
+        </li>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Accumulator value
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  numbers = Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>})
+  numbers:reduce(<span class="keyword">function</span>(accumulator, value) <span class="keyword">return</span> (accumulator <span class="keyword">or</span> <span class="number">0</span>) + value <span class="keyword">end</span>)
+  -&gt; <span class="number">6</span>
+  numbers:reduce(<span class="number">20</span>, <span class="keyword">function</span>(accumulator, value) <span class="keyword">return</span> accumulator + value <span class="keyword">end</span>)
+  -&gt; <span class="number">26</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:reject"></a>
+    <strong>Enumerable:reject (callback)</strong>
+    </dt>
+    <dd>
+    Create a new collection with elements which the callback returns false.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        New collection instance
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  items = Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>})
+  odd = Enumerable:reject(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>)
+  -&gt; Enumerable containing {<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:select"></a>
+    <strong>Enumerable:select (callback)</strong>
+    </dt>
+    <dd>
+    Create a new collection with elements which the callback returns true.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">callable</span></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        New collection instance
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  items = Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>})
+  even = Enumerable:<span class="global">select</span>(<span class="keyword">function</span>(value, index) <span class="keyword">return</span> value % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>)
+  -&gt; Enumerable containing {<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:shift"></a>
+    <strong>Enumerable:shift ()</strong>
+    </dt>
+    <dd>
+    Remove and return the first item from the collection.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        The collection instance
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  items = Enumerable.create({<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>})
+  items:shift()
+ -&gt; returns <span class="number">1</span>
+ -&gt; items now contains {<span class="number">2</span>,<span class="number">3</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:toTable"></a>
+    <strong>Enumerable:toTable ()</strong>
+    </dt>
+    <dd>
+    Create a shallow copy of the unwrapped collection data
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">clonedData = collection:toTable()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Enumerable:unshift"></a>
+    <strong>Enumerable:unshift (...)</strong>
+    </dt>
+    <dd>
+    Insert one or more items into the beginning of the collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+         Elements to insert
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="index.html#">enumerable</a></span>
+        The collection instance
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+  items = Enumerable.create({<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>})
+  items:unshift(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)
+  -&gt; Items now contains {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>}</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "enumerable._data"></a>
+    <strong>enumerable._data</strong>
+    </dt>
+    <dd>
+    Internal collection data
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2><a name="Local_Functions"></a>Local Functions</h2>
+    Methods
+    <dl class="function">
+    <dt>
+    <a name = "enumerable.isCallable"></a>
+    <strong>enumerable.isCallable (f)</strong>
+    </dt>
+    <dd>
+    Whether the item passed in may be called as a function
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">f</span>
+         Item to test for callability
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        True if passed in item may be called, false otherwise
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "enumerable.isSequence"></a>
+    <strong>enumerable.isSequence (t)</strong>
+    </dt>
+    <dd>
+    Tests tables for numeric keys with no gaps
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         Table to check
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        True if table is sequence-like, false otherwise
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2015-01-30 03:39:16 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
