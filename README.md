@@ -20,11 +20,11 @@ end)
 
 doubledCollection = collection:map(function(value, index)
   return value * 2
-end
+end)
 
 sum = collectionInstance:reduce(0, function(accumulator, value)
   return accumulator + value
-end
+end)
 ```
 
 Additional usage examples are in the [spec file](spec/enumerable_spec.lua).
@@ -60,3 +60,8 @@ Method | Description
 `unshift(...)` | Insert one or more items into the beginning of the collection.
 
 [Full API documentation](http://billiam.github.io/enumerable.lua/)
+
+Related projects:
+* [underscore.lua](https://github.com/mirven/underscore.lua)
+* [Moses](https://github.com/Yonaba/Moses)
+* [lua-enumerable](https://github.com/mikelovesrobots/lua-enumerable)
