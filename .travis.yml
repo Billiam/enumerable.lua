@@ -11,7 +11,7 @@ install:
   - sudo luarocks install busted
   - sudo luarocks install luacov-coveralls --server=http://rocks.moonscript.org/dev
 
-script: "busted --randomize --output=TAP spec"
+script: "busted --randomize -c --output=TAP spec"
 
 after_success:
    - luacov-coveralls -c spec/.luacov

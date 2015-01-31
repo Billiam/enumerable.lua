@@ -1,6 +1,7 @@
 # enumerable.lua
 
 [![Build Status](https://travis-ci.org/Billiam/enumerable.lua.svg)](https://travis-ci.org/Billiam/enumerable.lua)
+[![Coverage Status](https://coveralls.io/repos/Billiam/enumerable.lua/badge.svg)](https://coveralls.io/r/Billiam/enumerable.lua)
 
 A Ruby-inspired collection library.
 
@@ -14,7 +15,7 @@ Add [enumerable.lua](enumerable.lua) (or [enumerable-min.lua](enumerable-min.lua
 local Enumerable = require('enumerable')
 collectionInstance = Enumerable.create({1,2,3,4,5})
 
-collectionInstance:each(function(value, index) 
+collectionInstance:each(function(value, index)
   print(value)
 end)
 
