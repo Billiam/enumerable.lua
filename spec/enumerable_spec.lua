@@ -18,21 +18,21 @@ describe("Enumerable", function()
         end)
       end)
 
-      describe("when created with invalid data", function()        
+      describe("when created with invalid data", function()
         it("throws an error", function()
-          assert.has_error(function() Enumerable.create('not a table') end)
-          assert.has_error(function() Enumerable.create(10) end)
+          assert.has_error(function() Enumerable.create('not a table') end, 'Enumerable data must be a sequence')
+          assert.has_error(function() Enumerable.create(10) end, 'Enumerable data must be a sequence')
         end)
       end)
 
       describe("when created with a non-sequence table", function()
         it("throws an error", function()
-          assert.has_error(function() Enumerable.create({field = 'value'}) end)
+          assert.has_error(function() Enumerable.create({field = 'value'}) end, 'Enumerable data must be a sequence')
 
           local data = {1,2,3}
           data[2] = nil
 
-          assert.has_error(function() Enumerable.create(data) end)
+          assert.has_error(function() Enumerable.create(data) end, 'Enumerable data must be a sequence')
         end)
       end)
     end)
@@ -68,6 +68,24 @@ describe("Enumerable", function()
       end)
     end)
 
+    describe("empty()", function()
+      describe("when collection contains no elements", function()
+        local instance = Enumerable.create({})
+
+        it("is considered empty", function()
+          assert.is_true(instance:empty())
+        end)
+      end)
+
+      describe("when collection contains elements", function()
+        local instance = Enumerable.create({1,2,3})
+
+        it("is considered empty", function()
+          assert.is_false(instance:empty())
+        end)
+      end)
+    end)
+
     describe("each()", function()
       local instance = Enumerable.create({'a', 'b', 'c'})
 
@@ -86,7 +104,7 @@ describe("Enumerable", function()
       end)
     end)
   end)
-  
+
   describe("map()", function()
     local instance = Enumerable.create({10,20,30})
 
@@ -126,7 +144,7 @@ describe("Enumerable", function()
       assert.are.same(instance, result)
     end)
   end)
- 
+
   describe("find_index()", function()
     local instance = Enumerable.create({5, 10, 15})
     local callback = function(v, i) return v > 6 end
@@ -183,7 +201,7 @@ describe("Enumerable", function()
   describe("count()", function()
     local instance = Enumerable.create({1,2,3,4})
 
-    describe("when called without a callback", function() 
+    describe("when called without a callback", function()
       it("returns the internal table length", function()
         assert.are.equal(4, instance:count())
       end)
@@ -226,7 +244,14 @@ describe("Enumerable", function()
       assert.spy(callback).was.called_with(nil, 3, 3)
       assert.spy(callback).was.called(3)
     end)
-    
+
+    describe("with an invalid callback", function()
+      it("throws an error", function()
+        assert.has_error(function() instance:reduce({}) end, 'Callback must be a function or table')
+        assert.has_error(function() instance:reduce() end, 'Callback must be a function or table')
+      end)
+    end)
+
     describe("without an initial value", function()
       local callback = function(reduce, value) return (reduce or 0) + value end
 
@@ -263,10 +288,10 @@ describe("Enumerable", function()
         assert.spy(callback).was.called_with(5)
         assert.spy(callback).was.called_with(1)
         assert.spy(callback).was.called_with(4)
-        assert.spy(callback).was.called_with(2)        
+        assert.spy(callback).was.called_with(2)
         assert.spy(callback).was.called(5)
       end)
-    
+
 
       it("returns the value of the item with the lowest callback result", function()
         local callback = function(v) return v == 4 and 1 or 2 end
@@ -290,15 +315,15 @@ describe("Enumerable", function()
         local callback = spy.new(function() end)
 
         instance:max(callback)
-        
+
         assert.spy(callback).was.called_with(3)
         assert.spy(callback).was.called_with(5)
         assert.spy(callback).was.called_with(1)
         assert.spy(callback).was.called_with(4)
-        assert.spy(callback).was.called_with(2)        
+        assert.spy(callback).was.called_with(2)
         assert.spy(callback).was.called(5)
       end)
-      
+
       it("returns the value of the item with the highest callback result", function()
         local callback = function(v) return v == 4 and 2 or 1 end
 
@@ -326,7 +351,7 @@ describe("Enumerable", function()
         local callback = spy.new(function() end)
 
         instance:minmax(callback)
-     
+
         assert.spy(callback).was.called(8)
       end)
 
@@ -346,7 +371,7 @@ describe("Enumerable", function()
       assert.are.equal(instance, instance:sort())
     end)
 
-    describe("when called without a callback", function() 
+    describe("when called without a callback", function()
       local instance =  Enumerable.create({5,1,4,3,2})
 
       it("sorts elements in ascending order", function()
@@ -354,7 +379,7 @@ describe("Enumerable", function()
       end)
     end)
 
-    describe("when called with a callback", function() 
+    describe("when called with a callback", function()
       local instance =  Enumerable.create({5,1,4,3,2})
       local callback = function(a, b) return b < a end
 
@@ -436,7 +461,7 @@ describe("Enumerable", function()
       local callback = spy.new(function() end)
 
       instance:reject(callback)
-      
+
       assert.spy(callback).was.called_with(1, 1)
       assert.spy(callback).was.called_with(2, 2)
       assert.spy(callback).was.called_with(3, 3)
@@ -466,7 +491,7 @@ describe("Enumerable", function()
       local callback = spy.new(function() end)
 
       instance:reject(callback)
-      
+
       assert.spy(callback).was.called_with(1, 1)
       assert.spy(callback).was.called_with(2, 2)
       assert.spy(callback).was.called_with(3, 3)
@@ -525,7 +550,7 @@ describe("Enumerable", function()
       local callback = function(v) return v > 50 end
 
       it("returns false", function()
-        assert.is_false(instance:all(callback))
+        assert.is_false(instance:any(callback))
       end)
     end)
   end)
@@ -547,7 +572,7 @@ describe("Enumerable", function()
   end)
 
   describe("partition()", function()
-    local callback = function(v) return v % 2 == 0 end 
+    local callback = function(v) return v % 2 == 0 end
 
     it("creates lists based on boolean callback result", function()
       local instance = Enumerable.create({1,2,3,4})

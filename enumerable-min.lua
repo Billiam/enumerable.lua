@@ -63,9 +63,12 @@ end
 return n
 end
 function n:concat(n)return self:push(unpack(n))end
-function n:reduce(n,e)if not e and t(n)then
+function n:reduce(n,e)if not e then
+if t(n)then
 e=n
 n=nil
+else
+error('Callback must be a function or table with a __call metamethod')end
 end
 local n=n
 for t,r in ipairs(self._data)do

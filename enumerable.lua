@@ -40,8 +40,8 @@ end
 
 --- Enumerable constructor.
 -- If no collection is provided, a new empty table will be generated.
--- 
--- @usage 
+--
+-- @usage
 --  collection = Enumerable.create({123})
 -- @tparam ?table collection Sequential table to wrap
 -- @treturn enumerable A new collection instance
@@ -50,20 +50,20 @@ function Enumerable.create(collection)
   if collection and not (type(collection) == 'table' and isSequence(collection)) then
     error('Enumerable data must be a sequence')
   end
-  
+
   local instance = {
     --- Internal collection data
     -- @table _data
     _data = collection or {}
   }
-  
+
   setmetatable(instance, Enumerable)
 
   return instance
 end
 
 --- Return the unwrapped collection data
--- @usage 
+-- @usage
 --  collectionData = collection:to_table()
 -- @treturn table
 function Enumerable:data()
@@ -71,7 +71,7 @@ function Enumerable:data()
 end
 
 --- Create a shallow copy of the unwrapped collection data
--- @usage 
+-- @usage
 --  clonedData = collection:to_table()
 -- @treturn table
 function Enumerable:to_table()
@@ -84,7 +84,7 @@ function Enumerable:to_table()
 end
 
 --- Pass all elements in the collection to a callback
--- @usage 
+-- @usage
 --  collection:each(function(value, index) ... end)
 -- @tparam callable callback
 -- @treturn enumerable The collection instance
@@ -146,7 +146,7 @@ end
 
 --- Return the first element or elements in the collection.
 -- @see Enumerable:last
--- @usage 
+-- @usage
 --  collection = Enumerable.create({1,2,3,4})
 --  collection:first()
 --  -> 1
@@ -171,7 +171,7 @@ end
 
 --- Return the last element or elements in the collection.
 -- @see Enumerable:first
--- @usage 
+-- @usage
 --  collection = Enumerable.create({1,2,3,4})
 --  collection:last()
 --  -> 4
@@ -195,9 +195,9 @@ function Enumerable:last(n)
 end
 
 --- Return the number of items in the collection.
--- If a callback is given, count will return the 
+-- If a callback is given, count will return the
 -- number of elements for which the callback returns true
--- @usage 
+-- @usage
 --  collection = Enumerable.create({1,2,3})
 --  collection:count()
 --  -> 3
@@ -245,9 +245,13 @@ end
 -- @tparam callable callback
 -- @return Accumulator value
 function Enumerable:reduce(initial, callback)
-  if not callback and isCallable(initial) then
-    callback = initial
-    initial = nil
+  if not callback then
+    if isCallable(initial) then
+      callback = initial
+      initial = nil
+    else
+      error('Callback must be a function or table with a __call metamethod')
+    end
   end
 
   local reduce = initial
@@ -268,7 +272,7 @@ end
 -- -> 'aaaaa'
 --  strings:min(function(value) return #value end)
 -- -> 'c'
--- @tparam ?callable callback 
+-- @tparam ?callable callback
 -- @return Lowest value
 function Enumerable:min(callback)
   callback = callback or function(v) return v end
@@ -277,12 +281,12 @@ function Enumerable:min(callback)
 
   return self:reduce(function(output, v)
     local result = callback(v)
- 
+
     if not output or (result and result < lowestValue) then
       lowestValue = result
       return v
     end
-    
+
     return output
   end)
 end
@@ -296,7 +300,7 @@ end
 -- -> 'c'
 --  strings:max(function(value) return #value end)
 -- -> 'aaaaa'
--- @tparam ?callable callback 
+-- @tparam ?callable callback
 -- @return Highest value
 function Enumerable:max(callback)
   callback = callback or function(v) return v end
@@ -305,12 +309,12 @@ function Enumerable:max(callback)
 
   return self:reduce(function(output, v)
     local result = callback(v)
- 
+
     if not output or (result and result > highestValue) then
       highestValue = result
       return v
     end
-    
+
     return output
   end)
 end
@@ -324,7 +328,7 @@ end
 -- -> (1,6)
 --  strings:max(function(value) return 10 - value end)
 -- -> (6, 1)
--- @tparam ?callable callback 
+-- @tparam ?callable callback
 -- @return Lowest value
 -- @return Highest value
 function Enumerable:minmax(callback)
@@ -395,7 +399,7 @@ end
 --  numbers:find(function(value, index) return value > 25 end)
 --  -> 30
 -- @tparam callable callback
--- @return Matching item 
+-- @return Matching item
 function Enumerable:find(callback)
   for i,v in ipairs(self._data) do
     if callback(v, i) then
@@ -511,7 +515,7 @@ function Enumerable:group_by(callback)
 end
 
 --- Split enumerable into two groups, based on the true or false result of the callback.
--- 
+--
 -- Aliases: find_all, detect
 --
 -- @usage
@@ -532,7 +536,7 @@ function Enumerable:partition(callback)
  return results[true] or Enumerable.create(), results[false] or Enumerable.create()
 end
 
---- 
+---
 -- @function Enumerable:find_all
 -- @see Enumerable:select
 Enumerable.find_all = Enumerable.select

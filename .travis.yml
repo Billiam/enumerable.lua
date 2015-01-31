@@ -9,5 +9,9 @@ install:
   - sudo apt-get install luarocks
   - sudo luarocks install luafilesystem
   - sudo luarocks install busted
+  - sudo luarocks install luacov-coveralls --server=http://rocks.moonscript.org/dev
 
-script: "busted --output=TAP spec"
+script: "busted --randomize --output=TAP spec"
+
+after_success:
+   - luacov-coveralls -c spec/.luacov
