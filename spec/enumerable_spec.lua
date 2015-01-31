@@ -576,10 +576,10 @@ describe("Enumerable", function()
 
     it("creates lists based on boolean callback result", function()
       local instance = Enumerable.create({1,2,3,4})
-      local truthyResult, falseyResult = instance:partition(callback)
+      local evenResult, oddResult = instance:partition(callback)
 
-      assert.are.same(Enumerable.create({2,4}), truthyResult)
-      assert.are.same(Enumerable.create({1,3}), falseyResult)
+      assert.are.same({2,4}, evenResult:data())
+      assert.are.same({1,3}, oddResult:data())
     end)
 
     describe("when there are no results", function()
@@ -590,6 +590,18 @@ describe("Enumerable", function()
         assert.are.same({}, truthyResult:data())
         assert.are.same({}, falseyResult:data())
       end)
+    end)
+  end)
+
+  describe("delegation", function()
+    local instance = Enumerable.create({6,5,4,3,2,1})
+
+    it("it delegates index methods to internal table", function()
+      assert.are.equal(5, instance[2])
+    end)
+
+    it("returns nil for keys missing from internal table", function()
+      assert.is_equal(nil, instance[7])
     end)
   end)
 end)

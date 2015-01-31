@@ -15,6 +15,8 @@ Add [enumerable.lua](enumerable.lua) (or [enumerable-min.lua](enumerable-min.lua
 local Enumerable = require('enumerable')
 collectionInstance = Enumerable.create({1,2,3,4,5})
 
+secondElement = collectionInstance[2]
+
 collectionInstance:each(function(value, index)
   print(value)
 end)

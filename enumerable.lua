@@ -5,7 +5,11 @@
 -- @classmod enumerable
 -- @author Billiam
 local Enumerable = {}
-Enumerable.__index = Enumerable
+Enumerable.mt = {
+  __index = function(self, key)
+    return Enumerable[key] or self._data[key]
+  end
+}
 
 --- Tests tables for numeric keys with no gaps
 -- @tparam table t Table to check
@@ -57,7 +61,7 @@ function Enumerable.create(collection)
     _data = collection or {}
   }
 
-  setmetatable(instance, Enumerable)
+  setmetatable(instance, Enumerable.mt)
 
   return instance
 end
@@ -335,6 +339,19 @@ function Enumerable:minmax(callback)
   return self:min(callback), self:max(callback)
 end
 
+--- Sort the enumerable by optional callback in place.
+-- If a callback is not provided, data will be sorted in ascending order.
+-- If callback is provided, it will be passed two table elements, and should
+-- return true if the first element should appear first, otherwise false.
+-- See also: [table.sort documentation](http://www.lua.org/manual/5.1/manual.html#pdf-table.sort)
+-- @usage
+--  numbers = Enumerable.create({2,1,3})
+--  numbers:sort()
+--  -> numbers now contains {1,2,3}
+--  numbers:sort(function(a, b) return b < a end)
+--  -> numbers now contains {3,2,1}
+-- @tparam ?callable callback sort method
+-- @treturn enumerable The collection instance
 function Enumerable:sort(callback)
   table.sort(self._data, callback)
 
