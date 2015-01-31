@@ -66,7 +66,7 @@ function Enumerable.create(collection)
   return instance
 end
 
---- Return the unwrapped collection data
+--- Return the unwrapped collection data.
 -- @usage
 --  collectionData = collection:to_table()
 -- @treturn table
@@ -74,7 +74,7 @@ function Enumerable:data()
   return self._data
 end
 
---- Create a shallow copy of the unwrapped collection data
+--- Create a shallow copy of the unwrapped collection data.
 -- @usage
 --  clonedData = collection:to_table()
 -- @treturn table
@@ -87,7 +87,7 @@ function Enumerable:to_table()
   return target
 end
 
---- Pass all elements in the collection to a callback
+--- Pass all elements in the collection to a callback.
 -- @usage
 --  collection:each(function(value, index) ... end)
 -- @tparam callable callback
@@ -225,7 +225,7 @@ function Enumerable:count(callback)
   return count
 end
 
---- Append the contents of one table onto the end of the exsting enumerable
+--- Append the contents of one table onto the end of the existing enumerable.
 -- @usage
 --  pets = Enumerable:create({'dog', 'cat'})
 --  pets:concat({'turtle', 'wizard'})
@@ -410,7 +410,7 @@ function Enumerable:unshift(...)
   return self
 end
 
---- Returns the first element in the collection where the callback returns true
+--- Returns the first element in the collection where the callback returns true.
 -- @usage
 --  numbers = Enumerable.create({20, 30, 40})
 --  numbers:find(function(value, index) return value > 25 end)

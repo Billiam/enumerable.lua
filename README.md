@@ -38,9 +38,9 @@ Method | Description
 -------------|--------------
 `all(callback)` | Returns true if callback returns truthy for all elements in the collection.
 `any(callback)` | Returns true if callback returns truthy for any element in the collection.
-`concat(other)` | Append the contents of one table onto the end of the exsting enumerable
+`concat(other)` | Append the contents of one table onto the end of the exsting enumerable.
 `count(callback)` | Return the number of items in the collection.
-`data()` | Return the unwrapped collection data
+`data()` | Return the unwrapped collection data.
 `each(callback)` | Pass all elements in the collection to a callback
 `empty()` | Whether the collection has no elements.
 `find(callback)` | Returns the first element in the collection where the callback returns true
@@ -59,7 +59,8 @@ Method | Description
 `reject(callback)` | Create a new collection with elements which the callback returns false.
 `select(callback)` | Create a new collection with elements which the callback returns true. Aliases: `detect`, `find_all`
 `shift()` | Remove and return the first item from the collection.
-`to_table()` | Create a shallow copy of the unwrapped collection data
+`sort()` | Sort the enumerable by optional callback in place.
+`to_table()` | Create a shallow copy of the unwrapped collection data.
 `unshift(...)` | Insert one or more items into the beginning of the collection.
 
 [Full API documentation](http://billiam.github.io/enumerable.lua/)
